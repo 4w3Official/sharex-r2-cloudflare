@@ -1,0 +1,53 @@
+{
+	"name": "sharex-r2-cloudflare",
+	"version": "1.0.0",
+	"private": true,
+	"description": "ShareX Uploader to Cloudflare R2 via Workers",
+	"homepage": "https://github.com/4w3Official/sharex-r2-cloudflare#readme",
+	"bugs": {
+		"url": "https://github.com/4w3Official/sharex-r2-cloudflare/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/4w3Official/sharex-r2-cloudflare.git"
+	},
+	"license": "MIT",
+	"author": "Niklas Schumacher <hello@4w3.dev>",
+	"type": "module",
+	"main": "dist/index.mjs",
+	"scripts": {
+		"build": "esbuild src/index.ts --format=esm --platform=neutral --bundle --minify --sourcemap --main-fields=browser,module,main --outfile=dist/index.mjs",
+		"check-types": "npm run check-types:worker && npm run check-types:tests",
+		"check-types:worker": "tsc --noEmit",
+		"check-types:tests": "tsc --noEmit -p test/tsconfig.json",
+		"deploy": "wrangler deploy",
+		"dev": "wrangler dev",
+		"lint": "npm run lint:js && npm run lint:json && npm run check-types",
+		"lint:js": "eslint \"**/*.{js,mjs,ts}\"",
+		"lint:js:fix": "eslint \"**/*.{js,mjs,ts}\" --fix",
+		"lint:json": "eslint \"**/*.json\"",
+		"publish": "wrangler publish",
+		"test": "vitest"
+	},
+	"devDependencies": {
+		"@cloudflare/vitest-pool-workers": "0.8.32",
+		"@cloudflare/workers-types": "4.20250224.0",
+		"@nodecraft/eslint-config": "45.0.0",
+		"@typescript-eslint/eslint-plugin": "8.25.0",
+		"@typescript-eslint/parser": "8.25.0",
+		"esbuild": "0.25.0",
+		"eslint": "8.57.1",
+		"eslint-plugin-import": "2.31.0",
+		"eslint-plugin-json": "4.0.1",
+		"eslint-plugin-unicorn": "56.0.1",
+		"itty-router": "5.0.18",
+		"typescript": "5.7.3",
+		"render2": "1.4.2",
+		"vitest": "3.0.7",
+		"wrangler": "3.111.0"
+	},
+	"engines": {
+		"node": ">=20",
+		"npm": ">=10"
+	}
+}
